@@ -1,0 +1,5 @@
+select distinct p.cod_prt, r.data_ent, p.nome_pac, p.fone_res, p.celular from faprtcad p, fapaccad r
+where r.cod_prt = p.cod_prt
+and r.data_ent >= '01/11/2016'
+and p.data_obito is null
+and r.cod_pro = '003205'

@@ -1,0 +1,6 @@
+select * from v$rman_output
+--Caso dê o erro ORA-19625, rodar os scipts abaixo:
+--rman target /
+--allocate channel for delete type disk;
+--change archivelog all validate;
+--crosscheck archivelog all;

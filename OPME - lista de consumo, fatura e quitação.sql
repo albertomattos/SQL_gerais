@@ -1,0 +1,40 @@
+--Puxa o consumo do mês, relacionado às compras por fornecedor (1)
+select b.cod_pac, b.data_mov, a.lote, a.validade, a.cod_prd from esmovite a, esmovcad b
+where a.documento = b.documento and a.tipo_documento = b.tipo_documento
+and b.tipo_documento = 'REQ' and b.data_mov between '01/01/2016' and '30/11/2016' and b.cod_pac is not null and a.lote in (
+select a.lote from esmovite a, esmovcad b
+where a.documento = b.documento and a.tipo_documento = b.tipo_documento
+and b.tipo_documento = 'COM' and b.data_mov between '01/10/2015' and '30/11/2016' and b.cod_for = '018654' and a.lote <> 'S/L')
+--Na planilha, concatena cod_pac & cod_prd e joga data_mov para a última coluna
+
+--Puxa o faturado do mês, de OPME relacionado ao script acima (2)
+select fatura, cod_prd, valor_tot, cod_pac from fafatprd where cod_pac in (
+select b.cod_pac from esmovite a, esmovcad b
+where a.documento = b.documento and a.tipo_documento = b.tipo_documento
+and b.tipo_documento = 'REQ' and b.data_mov between '01/01/2016' and '30/11/2016' and b.cod_pac is not null and a.lote in (
+select a.lote from esmovite a, esmovcad b
+where a.documento = b.documento and a.tipo_documento = b.tipo_documento
+and b.tipo_documento = 'COM' and b.data_mov between '01/10/2015' and '30/11/2016' and b.cod_for = '018654' and a.lote <> 'S/L'))
+and cod_prd in (select codigo from faprdcad where tipo_prd = 'OPM')
+--Na planilha, concatena cod_pac & cod_prd e depois dá um procv dessa concatenação com a concatenação do primeiro script.
+--Copia valor_tot para a última coluna.
+--Retira todos os #N/D (itens de OPME que não são do fornecedor solicitado)
+
+--Quitação: utiliza os cod_pac do filtro acima (após retirar os #N/D) no script abaixo (3) e remover as duplicatas
+select cod_fatura, cod_produto, cod_pac, data_baixa, valor_pago from quitacao_produto
+where cod_pac in ('J786059','J794278','J865993','J895459','J910348','J911672','J923409','J923788','J964000','J979024','J995154','K003693','K027599','K040724','K058973','K062429','K071830','K073080','K083035','K105203','K157448','K160492','K192980','K199857','K231165','K245267','K252484','K306666','K310326','K317977','K354871','K379439','K380505','K425727','K439083','K474790','K487820','K490050','K495185','K522964','K593543','K614472','K618598','K620064','K632377','K655152','K672997','K687048','K691886','K694992','K695235','K720014','K723905','K724240','K724881','K730079','K749194','K761920','K787811','K788330','K820920','K857790','K862437','K892486','K897217','K899321','K900269','K968008','K968061','K974413','K997159','L005725','L008301','L018524','L043915','L120566','L124929','L126954','L127204','L150900','L156165','L164259','L164550','L206450','L220713','L232241','L241874','L279982','L304976','L310299','L323224','L362344','L364269','L456860','L512367','L525055','L527951','L532566','L536183','L538829','L539569','L546041','L559213','L570573','L595843','L618554','L619248','L631980','L633636','L640552','L648328','L656364','L662185','L687390','L688281','L721147','L731660','L731836','L738180','L739239','L756590','L768817','L769106','L775242','L784280','L787096','L795900','L816711','L916725','L938641','L945496','L946513','L951998','L952327','L974386','L991225','M055298','M072176','M160991','M173389','M181512','M198437','M199374','M207852','M209451','M241640','M257681','M260436','M271367','M302899','M304126','M378588','M384259','M388761','M394726','M395940','M396973','M423939','M430024','M431936','M434670','M435861','M444821','M448076','M457390','M460200','M461075','M475492','M486954','M494059','M494328','M500430','M513214','M518141','M521290','M522016','M523784','M530400','M536118','M537403','M549382','M550276','M566475','M591035','M595509','M612763','M622345','M634640','M635445','M645453','M649816','M651353','M679819','M682713','M704010','M726127','M762123')
+--Essa vai ser a planilha principal.
+--Na planilha, concatena cod_pac & cod_prd e depois dá um procv dessa concatenação com a concatenação do segundo script (de faturado).
+--Após retirar os #N/D, faz um procv desta planilha com a de valor faturado.
+
+--Roda o script abaixo, para linkar fatura e remessa
+select fatura, remessa from fafatcad where fatura in 
+('F96271','G06113','G10099','G06700','G06828','G09579','G10799','G09536','G16313','G15228','G12538','G24051','G27853','G21279','G34266','G26155','G19981','G18840','G19013','G24508','G21580','G20992','G22785','G36609','G33445','G33272','G26114','G38373','G32093','G44342','G37844','G40692','G42324','G48122','G43103','G44602','G48364','G46430','G46500','G48642','G57479','G53336','G58931','G57088','G68621','G61968','G63073','G60833','G58581','G60836','G60837','H13494','G63843','G73349','G63081','G63870','G70675','G68922','G68989','G82959','G68629','G74918','G72822','G76031','G72215','G74917','G81404','G88578','G81759','G84705','G95584','G81667','G85347','G84756','G84451','G95582','G93757','G90043','G90721','G93698','G92678','G96091','H09239','G99789','H01400','H47380','G96571','H11333','H18439','H11267','H28284','H08525','H09238','H18364','H33031','H23953','H46739','H31373','H66724','H34955','H32638','H33919','H31996','H33034','H35009','H36731','H43666','H35487','H32569','H41763','H38915','H38418','H38677','H42755','H39975','H41337','H40052','H75955','H42878','H43668','H51656','H44436','H58099','H42764','H46154','H44405','H93508','H48984','H55367','H75956','H63534','H70347','H66002','H60908','H78616','H68580','H71865','H76492','H80327','H73338','H81827','H79605','H87405','H71962','H76777','H83745','H77391','H81661','H85613','H96868','H93559','H89810','H86843','H89640','H90547','H97491','H90974','H94796','H90948','I09568','H93770','H95418','I06957','H92321','H97097','I00819','H94291','H98298','I09312','H96626','I10627','I07902','H98296','I13740','I13750','H98159','I03063','I01691','I01592','H99435','I01750','H99461','I01757','I01583','I06783','I09356','I11787','I14788','I08216','I11797','I03643','I03645','I05795','I06104','I05923','I13003','I12126')
+--Com o resultado, faz um procv da planilha principal, na coluna cod_fatura, com o resultado acima, para buscar a remessa
+
+--Roda o script abaixo, para pegar a data de baixa
+select remessa, data_entre from faremcad where remessa in 
+(select remessa from fafatcad where fatura in 
+('F96271','G06113','G10099','G06700','G06828','G09579','G10799','G09536','G16313','G15228','G12538','G24051','G27853','G21279','G34266','G26155','G19981','G18840','G19013','G24508','G21580','G20992','G22785','G36609','G33445','G33272','G26114','G38373','G32093','G44342','G37844','G40692','G42324','G48122','G43103','G44602','G48364','G46430','G46500','G48642','G57479','G53336','G58931','G57088','G68621','G61968','G63073','G60833','G58581','G60836','G60837','H13494','G63843','G73349','G63081','G63870','G70675','G68922','G68989','G82959','G68629','G74918','G72822','G76031','G72215','G74917','G81404','G88578','G81759','G84705','G95584','G81667','G85347','G84756','G84451','G95582','G93757','G90043','G90721','G93698','G92678','G96091','H09239','G99789','H01400','H47380','G96571','H11333','H18439','H11267','H28284','H08525','H09238','H18364','H33031','H23953','H46739','H31373','H66724','H34955','H32638','H33919','H31996','H33034','H35009','H36731','H43666','H35487','H32569','H41763','H38915','H38418','H38677','H42755','H39975','H41337','H40052','H75955','H42878','H43668','H51656','H44436','H58099','H42764','H46154','H44405','H93508','H48984','H55367','H75956','H63534','H70347','H66002','H60908','H78616','H68580','H71865','H76492','H80327','H73338','H81827','H79605','H87405','H71962','H76777','H83745','H77391','H81661','H85613','H96868','H93559','H89810','H86843','H89640','H90547','H97491','H90974','H94796','H90948','I09568','H93770','H95418','I06957','H92321','H97097','I00819','H94291','H98298','I09312','H96626','I10627','I07902','H98296','I13740','I13750','H98159','I03063','I01691','I01592','H99435','I01750','H99461','I01757','I01583','I06783','I09356','I11787','I14788','I08216','I11797','I03643','I03645','I05795','I06104','I05923','I13003','I12126')
+)
+--Com o procv anterior (remessa), faz um procv com este script, para pegar a data de baixa.

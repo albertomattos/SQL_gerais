@@ -1,0 +1,10 @@
+--create user labwide identified by labwide;
+grant all on admwpd.LWS_COMUNICACAO to labwide;
+grant all on admwpd.LWS_COM_EVENTOS_COMANDOS to labwide;
+grant all on admwpd.LWS_COM_PACIENTES to labwide;
+grant all on admwpd.LWS_COM_AMOSTRAS to labwide;
+grant all on admwpd.LWS_COM_SOLICITACAO_EXAMES to labwide;
+grant all on admwpd.LWS_COM_RESULTADOS to labwide;
+grant all on admwpd.LWS_COM_GRAFICOS to labwide;
+grant all on admwpd.LWS_COM_FLAGS to labwide;
+grant all on admwpd.LWS_COM_ANTIBIOGRAMA to labwide;

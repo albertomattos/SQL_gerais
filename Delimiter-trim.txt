@@ -1,0 +1,12 @@
+update des set codigo = '00'||codigo
+ where length (codigo) = 4
+
+load from med.txt
+insert into medica
+
+unload to a.sql delimiter ";"
+
+select
+"UPDATE faprdcad set est_min ="||est_min||" where codigo = '"||
+trim(codigo)||"'"
+from medica

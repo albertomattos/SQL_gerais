@@ -1,0 +1,7 @@
+select * from TI_CTR_CONTASPAGAR where 1=1
+and nu_NOTA_FISCAL LIKE '%7676'
+--order by 1 desc
+
+SELECT * FROM INTP_CTR_PROC P WHERE 1=1
+AND P.SEQ_TI = 45530
+AND P.SEQ_EIL = 4

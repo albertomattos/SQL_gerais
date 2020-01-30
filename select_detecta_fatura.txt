@@ -1,0 +1,38 @@
+-- Select abaixo mostra as faturas da remessa
+-- que possivelmente estão com problemas.
+
+SELECT FAPACCAD.COD_CON,FATURA,VALOR_TOT,(VALOR_CH+VALOR_FILME),VALOR_MAT_TAX
+  FROM FAPACCAD,FAFATCAD
+ where FAPACCAD.COD_PAC = FAFATCAD.COD_PAC
+   AND REMESSA = 'alterar pelo numero da remessa'
+   AND VALOR_MAT_TAX < -1
+
+-- Select abaixo mostra as faturas da remessa
+-- que possivelmente estão com problemas,
+-- o valor correto do campo VALOR_MAT_TAX e o 
+-- valor atual desse campo.
+
+SELECT FAPACCAD.COD_CON,FATURA,VALOR_TOT,(VALOR_CH+VALOR_FILME) SOMA,
+       (VALOR_TOT-(VALOR_CH+VALOR_FILME)) SUB,VALOR_MAT_TAX
+  FROM FAPACCAD,FAFATCAD
+ where FAPACCAD.COD_PAC = FAFATCAD.COD_PAC
+   AND REMESSA = 'alterar pelo numero da remessa'
+   AND (VALOR_TOT-(VALOR_CH+VALOR_FILME)) <> VALOR_MAT_TAX
+
+
+-- Select abaixo mostra as faturas do
+-- select anterior e se possuem repasse.
+
+SELECT COD_FATURA,NUMERO_REPASSE
+  FROM FAFATCAD, FAMOVDESTINO
+ WHERE FATURA = COD_FATURA
+   AND NUMERO_REPASSE IS NOT NULL
+   AND FATURA IN ('551500','551518','551524','551527')
+
+-- Select abaixo exibe o valor total 
+-- referente a GRD, verificar o resultado
+-- com o valor total da remessa
+
+select sum(valor_ch+valor_filme+valor_mat_tax) from fapaccad,fafatcad
+where fafatcad.cod_pac=fapaccad.cod_pac
+and fafatcad.remessa="033219"

@@ -1,0 +1,2 @@
+select t.*, t.rowid from  ESPCLI_PROF_UNID t where t.cod_pro = '001423'
+--t.cod_ala = 'PSCA'

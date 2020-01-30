@@ -1,0 +1,3 @@
+select v.nome_pac, t.*, t.rowid from sol_exame t, fapaccad u, faprtcad v
+where t.cod_pac = u.cod_pac and u.cod_prt = v.cod_prt
+order by t.cod_pac desc

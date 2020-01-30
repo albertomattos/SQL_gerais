@@ -1,0 +1,1 @@
+select t.*, t.rowid from rcintcad t where t.leito = '223-3' order by t.data_fin desc

@@ -1,0 +1,9 @@
+select u.crm, u.nome_pro, u.fone_celular, u.fone_res, u.email
+from famovprd t, faprocad u, famovcad v
+where t.cod_pro = u.cod_pro
+and t.comanda = v.comanda and t.tipo_comanda = v.tipo_comanda
+and t.cod_pro <> '000001'
+and u.inativo = 'N' and u.cod_profissao = 'MEDC'
+and v.data_mov between '01/10/2015' and '30/09/2016'
+group by u.crm, u.nome_pro, u.fone_celular, u.fone_res, u.email, u.cod_profissao
+order by u.nome_pro

@@ -1,0 +1,5 @@
+select t.*, t.rowid from cpmovcad t where nota_ori like '%14064%'
+select t.*, t.rowid from cpmovite t where documento like '%14064%'
+select t.*, t.rowid from esmovcad t where documento = '0013268'
+select t.*, t.rowid from esmovcad t where nota like '%2715'
+select t.*, t.rowid from esmovite t where documento = '0013268'

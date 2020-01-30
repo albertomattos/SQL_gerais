@@ -1,0 +1,8 @@
+select * from INTP_REP_FATCPAG where sequencial 
+in (45070,45071,45072,45073,45111,45112,45130,45171,45192,45193)
+;
+
+select * from intp_ctr_proc where seq_ti 
+in (45070,45071,45072,45073,45111,45112,45130,45171,45192,45193)
+for update
+

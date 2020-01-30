@@ -1,0 +1,12 @@
+select req_dev,fatipcad.descricao,famovprd.quant, famovdestino.valor_tot valor_consumo,
+decode(a.req_dev,'D',sum(b.valor_tot)*(-1),sum(b.valor_tot)) total,
+from fapaccad, faprtcad, fatipcad, faprdcad, famovcad, famovprd, famovdestino
+where famovcad.cod_pac = fapaccad.cod_pac
+and famovcad.comanda = famovprd.comanda
+and famovprd.sequencial = famovdestino.sequencial
+and famovprd.codigo = faprdcad.codigo
+and faprdcad.tipo_prd = fatipcad.tipo_prd
+and famovcad.data_mov between '01/02/2013' and '28/02/2013'
+and faprdcad.tipo_prd = 'DES'
+--and fapaccad.cod_pac = "A096436" --and faprdcad.codigo = "028820"
+order by fatipcad.tipo_prd, faprdcad.codigo

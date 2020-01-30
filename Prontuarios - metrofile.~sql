@@ -1,0 +1,7 @@
+select p.cod_prt, cod_pac, p.nome_pac, tipo_pac from faprtcad p, fapaccad r
+where r.cod_prt = p.cod_prt
+and r.data_ent >= "01/01/2005"
+
+select count(*) from faprtcad p, fapaccad r
+where r.cod_prt = p.cod_prt
+and r.data_ent >= "01/01/2005"

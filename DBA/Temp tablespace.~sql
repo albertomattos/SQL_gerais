@@ -1,0 +1,25 @@
+--Bytes livres
+SELECT tablespace_name, round((sum(bytes)/sum(maxbytes))*100,2) max_bytes FROM DBA_TEMP_FILES
+group by tablespace_name
+order by (sum(bytes)/sum(maxbytes)) desc;
+
+select * from dba_temp_files
+
+--CREATE TEMPORARY TABLESPACE tempagfa TEMPFILE 'H:\ORADATA\PROD\DATAFILE\02_TEMPAGFA.TMP' SIZE 100m AUTOEXTEND ON NEXT 100m EXTENT MANAGEMENT LOCAL;
+--alter tablespace temp3 tablespace group TMP1_GROUP;
+
+ALTER DATABASE TEMPFILE 'H:\oradata\PROD\DATAFILE\TEMPMEGA.TMP' OFFLINE;
+ALTER DATABASE TEMPFILE 'H:\oradata\PROD\DATAFILE\TEMPMEGA.TMP' DROP INCLUDING DATAFILES;
+ALTER DATABASE TEMPFILE 'H:\oradata\PROD\DATAFILE\01_TEMPAGFA.TMP' DROP INCLUDING DATAFILES;
+
+ALTER TABLESPACE TEMPMEGA ADD TEMPFILE 'H:\ORADATA\PROD\DATAFILE\01_TEMPMEGA.TMP' SIZE 100M AUTOEXTEND ON;
+/*select * from dba_tablespace_groups;
+ALTER TABLESPACE 01_TEMPMEGA2.TMP TABLESPACE GROUP '';
+
+alter user mgmt_view temporary tablespace tempmega
+
+select 	USERNAME,	CREATED, PROFILE,	DEFAULT_TABLESPACE,	TEMPORARY_TABLESPACE from dba_users order by 4
+
+ALTER TABLESPACE agfatemp3 TABLESPACE GROUP '';
+drop tablespace agfatemp3
+*/

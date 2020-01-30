@@ -1,0 +1,9 @@
+--delete from ticket_medio where data_atual between '01/03/2016' and '31/03/2016';
+--Commit;
+BEGIN 
+   insertTICKET(v_count => '',
+               dti => '01/06/2018',
+               dtf => '30/06/2018');
+END;
+
+select * from ticket_medio

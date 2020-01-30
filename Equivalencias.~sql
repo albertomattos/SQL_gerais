@@ -1,0 +1,17 @@
+/*select * from faequcad order by cod_equ desc
+select * from fatiscad*/
+
+select b.tipo_prd, a.codigo, b.descricao, a.cod_equ from faecpcad a, faprdcad b
+where a.codigo = b.codigo and a.cod_con = '073'
+and b.tipo_prd in ('GMD', 'DIA', 'TAX', 'VID') order by b.tipo_prd
+
+select t.*, t.rowid from faequcad t where t.cod_con = '073' --select max(pk_equcad) from faequcad
+
+select * from faetpcad where cod_con = '073' --equivalência por tipo
+/*delete from faecpcad where codigo in (
+    select codigo from faprdcad where tipo_prd in ('TOM','ANE','ANG','CAR','CON','DEN','EXA','EXC','FIS','FRI','HEM','HMD',
+    'HON','LAB','LCR','MAM','MDN','MMA','RAD','RAX','RES','ULT'))
+    and cod_con = "001"*/
+
+--delete from faecpcad where cod_con = "057" and codigo in (select codigo from faprdcad where tipo_prd not in ("TAX","DIA","GAS","TXC"))
+

@@ -1,0 +1,5 @@
+select a.destino Destino, a.sequencial Sequencial, d.descricao Descricao from famovdestino a, famovdestino_wsus b, fafatprd c, faprdcad d
+where a.sequencial = b.sequencial
+and a.destino like 'H'
+and a.cod_fatura = c.fatura
+and c.cod_prd = d.codigo

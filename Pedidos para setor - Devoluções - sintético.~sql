@@ -1,0 +1,6 @@
+SELECT esmovcad.DOCUMENTO, esmovcad.SET_CON, FASETCAD.DESCRICAO, esmovcad.hra_movimentacao, esmovcad.DATA_MOV, esmovcad.COD_PAC, 
+       fausucad.apelido FROM esmovcad esmovcad,FASETCAD FASETCAD, fausucad fausucad
+WHERE FASETCAD.COD_SET = esmovcad.SET_CON and esmovcad.fk_matricula = fausucad.matricula
+       AND (( esmovcad.DATA_MOV BETWEEN TO_DATE('2017/12/01','YYYY/MM/DD') AND TO_DATE('2017/12/15','YYYY/MM/DD') )
+       AND ( esmovcad.SET_EST = '0155') AND ( esmovcad.cred_deb = 'D' ))
+ORDER BY esmovcad.DATA_MOV, esmovcad.hra_movimentacao

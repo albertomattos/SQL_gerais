@@ -1,0 +1,10 @@
+set linesize 1000 trimspool on pagesize 0;
+SPOOL CRIA_SEQ.SQL;
+SELECT 'CREATE public SYNONYM '||SEQUENCE_NAME||' FOR '||SEQUENCE_NAME||';'
+FROM USER_SEQUENCES;
+
+SELECT 'grant select on '||SEQUENCE_NAME||' TO MXMSYS,MXMDBA;'
+FROM USER_SEQUENCES;
+SPOOL OFF;
+set pagesize 100;
+@CRIA_SEQ.sql;

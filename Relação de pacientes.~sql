@@ -1,0 +1,26 @@
+SELECT fapaccad.tipo_pac, fapaccad.data_ent,
+       fapaccad.hora_ent, fapaccad.data_alta,
+       fapaccad.hora_alta, fapaccad.cod_pac,
+       faprtcad.nome_pac,
+       faprtcad.end_complemento,
+       faprtcad.end_numero, faprtcad.celular,
+       faprtcad.bai_res, faprtcad.cep_res,
+       faprtcad.cid_res, faprtcad.dsc_email,
+       faprtcad.end_res, faprtcad.est_res,
+       faprtcad.fone_res, faprtcad.pais_res,
+       faconcad.fantasia, faprtcad.sexo,
+       faprdcad.descricao,
+       decode(tipo_pac,'A','mbulatório','I','nterno','E','xterno','U','rgência') decode_tipo_pac
+FROM fapaccad fapaccad, faprtcad faprtcad, imagnexa imagnexa, faprdcad faprdcad
+     , faprocad faprocad, faconcad faconcad
+     , faalacad faalacad, faplacad faplacad
+WHERE (faprtcad.cod_prt = fapaccad.cod_prt) AND
+      (faprocad.cod_pro = fapaccad.cod_pro) AND
+      (faconcad.cod_con = fapaccad.cod_con) AND
+      (faalacad.cod_ala = fapaccad.cod_ala) AND
+      (faplacad.cod_con = fapaccad.cod_con) AND
+      (imagnexa.cod_pac = fapaccad.cod_pac) AND
+      (imagnexa.cod_prd = faprdcad.codigo)  AND
+      (faplacad.cod_pla = fapaccad.cod_pla) AND
+      ((fapaccad.data_ent BETWEEN '01/11/2004' AND '01/11/2004') AND ( fapaccad.tipo_pac IN ('A') ))
+ORDER BY faprtcad.nome_pac, fapaccad.data_ent

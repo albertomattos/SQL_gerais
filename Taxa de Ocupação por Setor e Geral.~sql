@@ -1,0 +1,5 @@
+select sum(num_pac)/sum(num_leitos)*100 from taxa_ocupacao where data between '25/02/2018' and '25/02/2018'
+and cod_set in ('0130','0133','0453','0006')
+
+select * from taxa_ocupacao
+

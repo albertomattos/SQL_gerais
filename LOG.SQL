@@ -1,0 +1,16 @@
+select modulo, funcao, apelido, sistema, data, complemento from falogcad t, fausucad u
+--select * from falogcad t, fausucad u
+where t.matricula = u.matricula
+--and sistema not in ('LAB','VIS', 'EST')
+--and sistema in ('EST')
+--and funcao = 'EXC'
+--and funcao not in ('AUD','TAA','IAX','QUD')
+--and modulo in ('FAPRD','ESPRD')
+--and modulo = 'FAFEC'
+--and data = '18/03/2013'
+and data between '10/08/2018' and '16/08/2018'
+--and complemento like '%3475392%'
+and complemento like '%S613657%'
+--and u.apelido like 'ALBERTO%'
+--and endereco_ip like '172.30.1.16'
+order by data

@@ -1,0 +1,2 @@
+select fapaccad.cod_pac, faprtcad.obs1, faprtcad.cod_prt from faprtcad, fapaccad where faprtcad.cod_prt = fapaccad.cod_prt
+and fapaccad.cod_pac in(984415,984847,988524,985170,985218,985191,985171,985231,985250,985243,985211,985234,984276,986142,985943)

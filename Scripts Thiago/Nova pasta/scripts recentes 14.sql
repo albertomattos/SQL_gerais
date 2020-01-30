@@ -1,0 +1,27 @@
+BEGIN
+  FOR REG IN (SELECT I.*
+          FROM ITEM_DISTRIB I,
+             PRESCRICAO_PAC P
+         WHERE P.CODIGO_PAI IS NULL
+           AND P.COD_SAL_PAI IS NULL
+           AND I.STATUS_SEQ = 'M'
+           AND P.COD_PAC = I.COD_PAC
+           AND I.STATUS_HORARIO = 'A'
+           AND P.DATA_HORA_INI = I.DATA_HORA_INI
+           AND ((P.CODIGO = I.CODIGO AND I.CODIGO IS NOT NULL) OR 
+            (P.COD_SAL = I.COD_SAL AND I.COD_SAL IS NOT NULL)) 
+           AND I.STATUS_DISP = 'S') LOOP
+           
+        UPDATE ITEM_DISTRIB 
+       SET STATUS_SEQ     = 'C' 
+     WHERE CODIGO         = REG.CODIGO 
+       AND COD_PAC        = REG.COD_PAC
+       AND COD_MAPA       = REG.COD_MAPA
+       AND STATUS_SEQ     = 'M'
+       AND STATUS_HORARIO = 'A'
+         AND SEQ_COD_BARRA = REG.SEQ_COD_BARRA
+       AND DATA_HORA_INI = REG.DATA_HORA_INI;
+  END LOOP;
+     
+  COMMIT;
+END;

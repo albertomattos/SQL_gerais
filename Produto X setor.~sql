@@ -1,0 +1,4 @@
+select t.*, u.descricao from esprod_set_lote t, faprdcad u
+where t.cod_prd = u.codigo
+and t.cod_set = '0089'
+order by u.descricao

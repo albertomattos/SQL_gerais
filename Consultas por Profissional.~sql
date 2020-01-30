@@ -1,0 +1,8 @@
+select COUNT(u.cod_pac)--, t.cod_pro, x.valor_tot, v.nome_pro
+from famovprd t, famovcad u, faprocad v, famovdestino x
+where t.comanda = u.comanda and t.tipo_comanda = u.tipo_comanda
+and t.sequencial = x.sequencial
+and t.cod_pro = v.cod_pro
+and t.codigo in (select codigo from faprdcad where tipo_prd = 'CON')
+and t.cod_pro = '000197'
+and u.data_mov between '01/02/2013' and '28/02/2013'

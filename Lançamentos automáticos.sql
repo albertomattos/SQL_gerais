@@ -1,0 +1,12 @@
+/*select distinct cod_con from proced_real_tprd*/
+insert into proced_real_tprd values ('281','CON');
+insert into proced_real_tprd values ('281','EXA');
+insert into proced_real_tprd values ('281','EXC');
+insert into proced_real_tprd values ('281','HON');
+insert into proced_real_tprd values ('281','LAB');
+insert into proced_real_tprd values ('281','LCR');
+insert into proced_real_tprd values ('281','MAM');
+insert into proced_real_tprd values ('281','RAX');
+insert into proced_real_tprd values ('281','RES');
+insert into proced_real_tprd values ('281','TOM');
+insert into proced_real_tprd values ('281','ULT')

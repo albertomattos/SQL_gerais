@@ -1,0 +1,32 @@
+--set ORACLE_SID=PROD
+
+ADR base = "c:\app\oracle"
+set base H:\oracle
+
+adrci
+show homepath
+set homepath "caminho"
+diag\rdbms\homol\homol
+diag\rdbms\nci\nci
+diag\rdbms\prod\prod
+diag\rdbms\sashomol\sashomol
+
+set homepath diag\rdbms\prod\prod
+
+purge -age 2880 -type incident;
+purge -age 2880 -type ALERT;
+purge -age 2880 -type TRACE;
+purge -age 2880 -type CDUMP;
+purge -age 2880 -type HM;
+--2880 minutos, ou 2 dias
+
+purge -age 1440 -type incident;
+purge -age 1440 -type ALERT;
+purge -age 1440 -type TRACE;
+purge -age 1440 -type CDUMP;
+purge -age 1440 -type HM;
+
+
+--show control
+--set control (SHORTP_POLICY = 360); (360 horas ou 15 dias) 168 horas (7 dias)
+--set control (LONGP_POLICY = 720); (30 dias)

@@ -1,0 +1,26 @@
+ SELECT                                                  
+     FAPRTCAD.NOME_PAC,                                  
+     FAPACCAD.NOME_SEGU,                                 
+     FAGUICAD.NUM_GUIA,                                  
+     FAPACCAD.MATRICULA,                                 
+     FAPACCAD.SENHA,                                     
+     FAPACCAD.TIPO_PAC,
+     FAFATCAD.VALOR_GUIA,
+     FAFATCAD.VALOR_PAGO                                   
+ FROM                                                    
+     FAPACCAD,                                           
+     FAPRTCAD,                                           
+     FAFATCAD,                                           
+     FAGUICAD,                                           
+     FAMOVPRD,                                           
+     FAMOVDESTINO                                        
+ WHERE                                                   
+     (FAPACCAD.COD_PRT = FAPRTCAD.COD_PRT) AND           
+     (FAPACCAD.COD_PAC = '1083794') AND                  
+     (FAFATCAD.FATURA = '816360') AND                
+     (FAMOVDESTINO.COD_FATURA = FAFATCAD.FATURA) AND     
+     (FAMOVPRD.SEQUENCIAL = FAMOVDESTINO.SEQUENCIAL) AND 
+     (FAGUICAD.COD_GUIA = FAMOVPRD.COD_GUIA)         AND 
+     (FAGUICAD.NUM_GUIA = FAPACCAD.NUM_GUIA)
+     GROUP BY FAPRTCAD.NOME_PAC, FAPACCAD.NOME_SEGU, FAGUICAD.NUM_GUIA,FAPACCAD.MATRICULA,FAPACCAD.SENHA,FAPACCAD.TIPO_PAC,FAFATCAD.VALOR_GUIA, FAFATCAD.VALOR_PAGO         
+

@@ -1,0 +1,12 @@
+SELECT *FROM FAMCACAD
+
+
+SELECT
+  Case DEP_RET
+    When 'D' then 'Depósito'
+      When 'R' then 'Requisição'
+  End AS DEP_RT
+FROM FAMCACAD
+
+
+SELECT Case DEP_RET When 'D' then 'Depósito' When 'R' then 'Requisição'End AS DEP_RT FROM FAMCACAD

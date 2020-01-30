@@ -1,0 +1,1 @@
+select count(*) from fapaccad where tipo_pac = 'A' and data_ent between '01/11/2013' and '30/11/2013'

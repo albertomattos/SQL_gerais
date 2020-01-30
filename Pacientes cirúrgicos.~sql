@@ -1,0 +1,6 @@
+select fapaccad.cod_pac from fapaccad, faprccad
+where fapaccad.cod_pac=faprccad.cod_pac
+and faprccad.prev_real="R"
+and faprccad.cod_set="3314"
+and fapaccad.tipo_pac="I"
+and fapaccad.data_ent between "01/12/2009" and "31/12/2009"
